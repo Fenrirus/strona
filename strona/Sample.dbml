@@ -9,7 +9,7 @@
     </Type>
   </Table>
   <Table Name="dbo.Employees" Member="Employees">
-    <Type Name="Employees">
+    <Type Name="Employees" Id="ID1">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="FirstName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="LastName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
@@ -18,5 +18,59 @@
       <Column Name="DepartmentId" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Departments_Employees" Member="Departments" ThisKey="DepartmentId" OtherKey="ID" Type="Departments" IsForeignKey="true" />
     </Type>
+    <InsertFunction FunctionId="FunctionId1">
+      <Argument Parameter="firstName" Member="FirstName" />
+      <Argument Parameter="lastName" Member="LastName" />
+      <Argument Parameter="gender" Member="Gender" />
+      <Argument Parameter="salary" Member="Salary" />
+      <Argument Parameter="departmentId" Member="DepartmentId" />
+    </InsertFunction>
+    <UpdateFunction FunctionId="FunctionId2">
+      <Argument Parameter="iD" Member="ID" />
+      <Argument Parameter="firstName" Member="FirstName" />
+      <Argument Parameter="lastName" Member="LastName" />
+      <Argument Parameter="gender" Member="Gender" />
+      <Argument Parameter="salary" Member="Salary" />
+      <Argument Parameter="departmentId" Member="DepartmentId" />
+    </UpdateFunction>
+    <DeleteFunction FunctionId="FunctionId3">
+      <Argument Parameter="iD" Member="ID" />
+    </DeleteFunction>
   </Table>
+  <Function Name="dbo.GetEmployees" Method="GetEmployees">
+    <ElementType IdRef="ID1" />
+  </Function>
+  <Function Id="FunctionId3" Name="dbo.DeleteEmployee" Method="DeleteEmployee">
+    <Parameter Name="ID" Parameter="iD" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Id="FunctionId1" Name="dbo.InsertEmployee" Method="InsertEmployee">
+    <Parameter Name="FirstName" Parameter="firstName" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="LastName" Parameter="lastName" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="Gender" Parameter="gender" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="Salary" Parameter="salary" Type="System.Int32" DbType="Int" />
+    <Parameter Name="DepartmentId" Parameter="departmentId" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Id="FunctionId2" Name="dbo.UpdateEmployee" Method="UpdateEmployee">
+    <Parameter Name="ID" Parameter="iD" Type="System.Int32" DbType="Int" />
+    <Parameter Name="FirstName" Parameter="firstName" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="LastName" Parameter="lastName" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="Gender" Parameter="gender" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="Salary" Parameter="salary" Type="System.Int32" DbType="Int" />
+    <Parameter Name="DepartmentId" Parameter="departmentId" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.GetEmployeesByDepartment" Method="GetEmployeesByDepartment">
+    <Parameter Name="DepartmentId" Parameter="departmentId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="DepartmentName" Parameter="departmentName" Type="System.String" DbType="NVarChar(50)" Direction="InOut" />
+    <ElementType Name="GetEmployeesByDepartmentResult">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="LastName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Gender" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Salary" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DepartmentId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
 </Database>

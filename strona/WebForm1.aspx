@@ -16,6 +16,10 @@
         <asp:Button ID="btnInsert" runat="server" OnClick="btnInsert_Click" Text="Insert" />
         <asp:Button ID="btnUpdate" runat="server" OnClick="btnUpdate_Click" Text="Update" />
         <asp:Button ID="btnDelete" runat="server" OnClick="btnDelete_Click" style="height: 26px" Text="Delete" />
+        <br />
+        <asp:Label ID="lblDept" runat="server"></asp:Label>
+        <br />
+        <asp:Button ID="btnGetEmployeesByDepartment" runat="server" OnClick="btnGetEmployeesByDepartment_Click" Text="Get Employees By Department" />
     </form>
 </body>
 </html>

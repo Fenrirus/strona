@@ -16,7 +16,7 @@ namespace strona
         private void GetData()
         {
             SampleDataContext dbContext = new SampleDataContext();
-            GridView1.DataSource = dbContext.Employees;
+            GridView1.DataSource = dbContext.GetEmployees();
             GridView1.DataBind();
         }
 
@@ -47,7 +47,7 @@ namespace strona
         {
             using (SampleDataContext dbContext = new SampleDataContext())
             {
-                Employees newEmployes = dbContext.Employees.SingleOrDefault(x => x.FirstName == "Robert");
+                Employees newEmployes = dbContext.Employees.SingleOrDefault(x => x.ID == 23);
                 newEmployes.Salary = 65000;
                 dbContext.SubmitChanges();
             }
@@ -58,11 +58,23 @@ namespace strona
         {
             using (SampleDataContext dbContext = new SampleDataContext())
             {
-                Employees newEmployes = dbContext.Employees.SingleOrDefault(x => x.FirstName == "Robert");
+                Employees newEmployes = dbContext.Employees.SingleOrDefault(x => x.ID == 23);
                 dbContext.Employees.DeleteOnSubmit(newEmployes);
                 dbContext.SubmitChanges();
             }
             GetData();
+        }
+
+        protected void btnGetEmployeesByDepartment_Click(object sender, EventArgs e)
+        {
+            using (SampleDataContext dbContext = new SampleDataContext())
+            {
+                string deptName = null;
+                GridView1.DataSource = dbContext.GetEmployeesByDepartment(1, ref deptName);
+                GridView1.DataBind();
+                lblDept.Text = "Department " + deptName;
+            }
+          
         }
     }
 }
