@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs" Inherits="strona.WebForm1" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="linqtosql.aspx.cs" Inherits="strona.WebForm1" %>
 
 <!DOCTYPE html>
 
