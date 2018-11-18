@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace strona
 {
-    public partial class WebForm1 : System.Web.UI.Page
+    public partial class WebForm1 : Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -47,8 +47,15 @@ namespace strona
         {
             using (SampleDataContext dbContext = new SampleDataContext())
             {
-                Employees newEmployes = dbContext.Employees.SingleOrDefault(x => x.ID == 23);
-                newEmployes.Salary = 65000;
+                //  Employees newEmployes = dbContext.Employees.SingleOrDefault(x => x.ID == 23);
+                //  newEmployes.Salary = 65000;
+                var newEmployes = from emp in dbContext.Employees
+                                  where emp.FirstName == "Robert"
+                                  select emp;
+                foreach(Employees data in newEmployes)
+                {
+                    data.Salary = 65000;
+                }
                 dbContext.SubmitChanges();
             }
             GetData();
@@ -58,8 +65,12 @@ namespace strona
         {
             using (SampleDataContext dbContext = new SampleDataContext())
             {
-                Employees newEmployes = dbContext.Employees.SingleOrDefault(x => x.ID == 23);
-                dbContext.Employees.DeleteOnSubmit(newEmployes);
+                //   Employees newEmployes = dbContext.Employees.SingleOrDefault(x => x.ID == 23);
+                //   dbContext.Employees.DeleteOnSubmit(newEmployes);
+                var newEmployes = from emp in dbContext.Employees
+                                  where emp.FirstName == "Robert"
+                                  select emp;
+                dbContext.Employees.DeleteAllOnSubmit(newEmployes);
                 dbContext.SubmitChanges();
             }
             GetData();
