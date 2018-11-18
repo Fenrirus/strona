@@ -48,6 +48,7 @@ namespace strona
             using (SampleDataContext dbContext = new SampleDataContext())
             {
                 //  Employees newEmployes = dbContext.Employees.SingleOrDefault(x => x.ID == 23);
+                //  newEmployes.Salary = 65000;
                 var newEmployes = from emp in dbContext.Employees
                                   where emp.FirstName == "Robert"
                                   select emp;
@@ -64,7 +65,8 @@ namespace strona
         {
             using (SampleDataContext dbContext = new SampleDataContext())
             {
-                //  Employees newEmployes = dbContext.Employees.SingleOrDefault(x => x.ID == 23);
+                //   Employees newEmployes = dbContext.Employees.SingleOrDefault(x => x.ID == 23);
+                //   dbContext.Employees.DeleteOnSubmit(newEmployes);
                 var newEmployes = from emp in dbContext.Employees
                                   where emp.FirstName == "Robert"
                                   select emp;
